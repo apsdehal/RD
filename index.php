@@ -205,11 +205,6 @@ span.work-section {
               <blockquote>
                 <p>We here at Roorkee Delivers provide best and affordable material available anywhere, confining to our standard, we serve you best.</p>
                 
-                <footer>
-                  <cite>
-                    Jek&#039;ob Washington <span class="project">Washington Projects</span>
-                  </cite>
-                </footer>
               </blockquote>
           </li>
         </ul>
