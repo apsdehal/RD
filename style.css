@@ -3341,16 +3341,13 @@ form .gfield_error label {
 }
 .item_image:first-child{
 	margin-left:-45px;}
-.item_image button{
+.addtocartbutton{
 	position:absolute;
 	top:0px;
 	left:-5px;
-	background-image:url(products_images/addtocart.png);
 	width:123px;
 	height:40px;
-	background-color:rgba(256,256,256,0);
-	border:none;
-	opacity:0%
+	cursor:pointer;
 }
 #cart{
 	position:fixed;

@@ -6,7 +6,15 @@ if(isset($_POST['returnJSON'])){
 		if(sha1($_POST['value']) == $_SESSION['pass_phrase']) echo 1;
 		else echo 0; 
 		
-		} else if(isset($_POST['itemName'])){
+		} else if(isset($_POST['final_count'])){
+			foreach($_SESSION['basket'] as $k){
+					if($k['name']==$_POST['title']){ $isThere = $i;break;}$i++;
+				}
+				$_SESSION['basket'][$isThere-1]['count']=$_POST['final_count'];
+
+			
+			
+			} else if(isset($_POST['itemName'])){
 		$i='0';
 		while(1){
 			if($_SESSION['basket'][$i]['name']==$_POST['itemName']){unset($_SESSION['basket'][$i]);

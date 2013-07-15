@@ -132,29 +132,31 @@ span.work-section {
 	<div class="container">
     <div class="item_image">
     <img class="item" src="products_images/Mattress.jpg" alt="Mattress" width="150px" height="250px"/>
-    <button></button>
+    <img class="addtocartbutton" src="products_images/addtocart.png" alt="Add to Cart">
     </div>
     <div class="item_image">
     <img class="item" src="products_images/Bucket.jpg" alt="Bucket" title="Bucket" width="150px" height="250px"/>
-    <button></button>
+    <img class="addtocartbutton" src="products_images/addtocart.png" alt="Add to Cart">
     </div>
     <div class="item_image">
     <img class="item" src="products_images/Bath Mug.jpg" alt="Bath Mug" title="Bath Mug" width="150px" height="250px"/>
-    <button></button>
+    <img class="addtocartbutton" src="products_images/addtocart.png" alt="Add to Cart">
     </div>
     <div class="item_image">
     <img class="item" src="products_images/Lock.jpg" alt="Lock" title="Lock" width="150px" height="250px"/>
-    <button></button>
+    <img class="addtocartbutton" src="products_images/addtocart.png" alt="Add to Cart">
     </div>
     <div class="item_image">
     <img class="item" src="products_images/Broomstick.jpg" alt="Broomstick" title="Broomstick" width="150px" height="250px"/>
-    <button></button>
+    <img class="addtocartbutton" src="products_images/addtocart.png" alt="Add to Cart">
     </div>
     <div class="item_image">
     <img class="item" src="products_images/Dustbin.jpg" alt="Dustbin" title="Dustbin" width="150px" height="250px"/>
-    <button></button>
+    <img class="addtocartbutton" src="products_images/addtocart.png" alt="Add to Cart">
     </div>
 </div>
+<button class="red_button" id="checkout_button2">Checkout!</button> 
+
 
 <div class="full-width red">
   <div class="container">
@@ -164,7 +166,7 @@ span.work-section {
           <li class="testimonial">
               
               <blockquote>
-                <p>The Order form will go here. The Order form will go here. The Order form will go here. The Order form will go here. The Order form will go here. The Order form will go here.</p>
+                <p>Add items to your carts on the air, by clicking on the items add to cart to button. Number of times you click, that times item is added to the cart. Checkout by clicking on checkout button</p>
                 
                </blockquote>
           </li>
@@ -176,6 +178,12 @@ span.work-section {
 
 </div>
 <script>
+$("#checkout_button2").toggle();
+$("#checkout_button2").css({
+	"position":"fixed",
+	"top":"5px",
+	"left":"3px"});
+
 items= new Array();
 var k,m=0;
 var yes= 'yes'
@@ -187,8 +195,8 @@ $.post("update_cart.php",{returnJSON:yes},function(stringData){
 		items[m].name=data[i]["name"];
 		items[m].count=data[i]["count"];
 		m++;
-		var count = $("#count").html();
-	$("#count").html(++count);
+		var count = parseInt($("#count").html(),10);
+	$("#count").html(count=count+parseInt(data[i]["count"],10));
 	}});
 	 
 });
@@ -272,21 +280,26 @@ $(document).tooltip({
 </script>
 <script>
 var isCartInfoOpen = false;
-$(".item_image button").toggle();
+$(".addtocartbutton").toggle();
 $("#verify_add").toggle();
 $("#cart_info").toggle();
 $(".item_image").hover(
 function(){
-	$(this).find("button").toggle();
+	$(this).find(".addtocartbutton").toggle();
 },
 function(){
-	$(this).find("button").toggle();
+	$(this).find(".addtocartbutton").toggle();
 }
 );
 var j=0;
+var checkout_button_existence =0;
+$("#checkout_button2").click(function(){ window.location.href="checkout.php";});
+if(parseInt($("#count").html(),10)>0 && checkout_button_existence==0){$("#checkout_button2").toggle();checkout_button_existence=1;}
 
 //items= new Array();
-$(".item_image button").click(function(){
+$(".addtocartbutton").click(function(){
+	if(checkout_button_existence==0){ $("#checkout_button2").toggle();checkout_button_existence=1;}
+
 	var count = $("#count").html();
 	$("#count").html(++count);
 	var title= $(this).parent().find("img").attr("alt");
@@ -319,7 +332,7 @@ $(".item_image button").click(function(){
 			var countname =items[i].count;
 			var img= $('<img src="products_images/'+name+'.jpg" alt="'+name+'" width="30px" height="30px">');
 			var paraText=$('<span>'+name+' <span class="item_quantity"> Quantity: '+countname+'</span></span><br/>');
-			var checkout_button="<button></button>";
+			var checkout_button=$('<img src="products_images/checkoutButton.png" alt="Checkout" id="checkoutButtonImg"/>');
 			$("#cart_info").append(img);
 			$("#cart_info").append(paraText);
 			
@@ -330,16 +343,13 @@ $(".item_image button").click(function(){
 			});
 			}
 		$("#cart_info").append(checkout_button);
-		$("#cart_info button").css({
-			"background-image":"url(products_images/checkoutButton.png)",
+		$("#checkoutButtonImg").css({
 			"width":"92px",
 			"height":"30px",
-			"color":"#fff",
-			"background-color":"rgba(256,256,256,0)",
-			"border":"none"
+			"cursor":"pointer"
 		});
-		$("#cart_info button").click(function(){
-			window.open("checkout.php");
+		$("#checkoutButtonImg").click(function(){
+			window.location.href="checkout.php";
 		});
 		$("#cart_info").toggle(); 
 		isCartInfoOpen=true; 

@@ -88,7 +88,7 @@ span.work-section {
 		<nav class="site-nav">
 			<ul id="menu-main-navigation" class="desktop"><li id="menu-item-17" class="work menu-item menu-item-type-post_type menu-item-object-page menu-item-17"><a href="ordernow.php" >Order Now</a></li>
         <li id="menu-item-14" class="about menu-item menu-item-type-post_type menu-item-object-page menu-item-14"><a href="#" >About Us</a></li>
-        <li id="menu-item-21" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-19 current_page_item menu-item-21"><a href="#" >Home</a></li>
+        <li id="menu-item-21" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-19"><a href="index.php" >Home</a></li>
         <li id="menu-item-15" class="blog menu-item menu-item-type-post_type menu-item-object-page menu-item-15"><a href="#" >Login/Register</a></li>
         <li id="menu-item-16" class="contact menu-item menu-item-type-post_type menu-item-object-page menu-item-16"><a href="#" >Contact Us</a></li>
       </ul>
@@ -108,11 +108,21 @@ span.work-section {
       </ul>
     </div>
 </div>
+<?php 
+	if (isset($_GET["message"])){
+		if($_GET["message"]==1){
+			echo '<font color="green"><b>Your order has been registered, we will get to you shortly</b></font> ';
+			$_SESSION= Array();
+			session_destroy();}
+		else{
+		echo 	'<font color="red"><b>There was some error. Sorry for inconvienence. Please try again by clicking on order now</b></font>'; }}
+		else{
+		?>
 
 <div class="full-width flush-bottom" id="cart_items_description">
 	<div class="container clearfix">
     <div id="urcart">
-    <p>Your cart contains following items:</p>
+        <p>Your cart contains following items:</p>
     <table>
     <tr><td>Image</td>
     <td>Name</td>
@@ -122,25 +132,33 @@ span.work-section {
     <?php foreach($_SESSION['basket'] as $i){
 		if(is_int($i)) continue;
 	
-		echo '<tr><td><p><img src="products_images/'.$i['name'].'.jpg" width="50px" height="50px"></td><td>'.$i['name'].'</td><td>'.'<input type="number" min = "1" size="10" value="'.$i['count'].'"?</td><td><input type="hidden" class ="hiddenDelete" title="'.$i['name'].'"><button></button></td></tr>';
+		echo '<tr><td><p><img src="products_images/'.$i['name'].'.jpg" width="50px" height="50px"></td><td>'.$i['name'].'</td><td>'.'<input type="number" min = "1" size="10" value="'.$i['count'].'" class="quantity_count" name="'.$i['name'].'"></td><td><input type="hidden" class ="hiddenDelete" title="'.$i['name'].'"><img src="images/delete.png" alt="Delete" class="deleteButton"/></td></tr>';
 	}
 ?>
 <script> 
-$("table tr td button").css({
-			"background-image":"url(images/delete.png)",
+var intial_count,final_count; 
+$(".quantity_count").hover(
+function(){intial_count =$(this).val();},
+function(){ final_count = $(this).val();
+if(final_count!= intial_count){
+	var title=$(this).attr("name");
+	$.post("update_cart.php",{final_count:final_count,title:title},function(){
+		});
+	}
+}
+);
+$(".deleteButton").css({
 			"width":"45px",
 			"height":"45px",
-			"color":"#fff",
-			"background-color":"rgba(256,256,256,0)",
-			"border":"none"
+			"cursor":"pointer"
 		});
 ;
-$("table tr td button").click(function(){
+$(".deleteButton").click(function(){
 	var name = $(this).parent().find(".hiddenDelete").attr('title');
 	$.post("update_cart.php",{itemName:name},function(){
 	});
 	$(this).parent().parent().remove();
-	if($("table tr").find(".hiddenDelete")==-1){
+	if($(".hiddenDelete".length)){}else{
 		$("#urcart").remove();
 	}
 });
@@ -148,11 +166,15 @@ $("table tr td button").click(function(){
         </table>
 	  </div>
       <br/>
-<button class="red_button">Shop More</button>
+<button class="red_button" id="shopMore">Shop More</button>
 
 <button class="red_button" id="checkout_button">Checkout!</button> 
 
-   
+<script>
+$("#shopMore").click(function(){
+	window.location.href="ordernow.php";
+});
+</script>   
 	</div>
 </div>
     
@@ -161,7 +183,7 @@ $("table tr td button").click(function(){
   <div class="container">
               
               <blockquote id="formBlock"> Please fill the following information to proceed:-<br/>
-                          <form method="post" action="complete_order.php">
+                          <form method="post" action="php/mailer.php">
                           <table>
                           <tr><td>
                           <input type="text" title="name" name="name" class="input_field" placeholder="Name" required><br/>
@@ -189,7 +211,7 @@ $("table tr td button").click(function(){
                           <img id="captcha" src="captcha.php" alt="verification"/>		
                           </td>
                           <td>
-                          <img src="images/dress.png" id="refreshCaptcha">Refresh Captcha</button>
+                          <img src="images/refresh.png" id="refreshCaptcha">
                           </td>
                           </tr>
 
@@ -201,7 +223,9 @@ $("table tr td button").click(function(){
 						  $("#formfield").toggle();
 						  
 						  $("#refreshCaptcha").css({
-							  "cursor":"pointer"});
+							  "cursor":"pointer",
+							  "position":"relative",
+							  "left":"-75px"});
 						  $("#refreshCaptcha").click(function(){
 							  $("#captcha").remove();
 							 var img= $('<img id="captcha" src="captcha.php" alt="verification">');
@@ -271,6 +295,7 @@ $("table tr td button").click(function(){
     </div>
   </div>
 </div>
+<?php } ?>
 <div class="full-width dark-grey flat footer">
   <div class="container">
     <div class="footer-foot">

@@ -203,7 +203,7 @@ span.work-section {
           <li class="testimonial">
               
               <blockquote>
-                <p>The Order form will go here. The Order form will go here. The Order form will go here. The Order form will go here. The Order form will go here. The Order form will go here.</p>
+                <p>We here at Roorkee Delivers provide best and affordable material available anywhere, confining to our standard, we serve you best.</p>
                 
                 <footer>
                   <cite>
