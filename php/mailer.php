@@ -1,7 +1,7 @@
 <?php	
 session_start();
-		$dbc= mysqli_connect("mysql3.000webhost.com","a3548479_RD","Rd3l!v3rs","a3548479_RD");
-		//$dbc = mysqli_connect('localhost','root','welcome','rd');
+require_once('connectvars_000.php');
+		$dbc= mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
 $name=mysqli_real_escape_string($dbc,$_POST["name"]);
 $mobile=mysqli_real_escape_string($dbc,$_POST["phoneno"]);
 $email=mysqli_real_escape_string($dbc,$_POST["email"]);
