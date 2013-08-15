@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
+    <link rel="icon" href="images/logo.png" type="image/x-icon" />  
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Roorkee Delivers</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -87,35 +88,31 @@ span.work-section {
 	<header class="container">
 		<nav class="site-nav">
 			<ul id="menu-main-navigation" class="desktop"><li id="menu-item-17" class="work menu-item menu-item-type-post_type menu-item-object-page menu-item-17"><a href="ordernow.php" >Order Now</a></li>
-        <li id="menu-item-14" class="about menu-item menu-item-type-post_type menu-item-object-page menu-item-14"><a href="#" >About Us</a></li>
+        <li id="menu-item-14" class="about menu-item menu-item-type-post_type menu-item-object-page menu-item-14"><a href="index.php#aboutus" >About Us</a></li>
         <li id="menu-item-21" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-19"><a href="index.php" >Home</a></li>
-        <li id="menu-item-15" class="blog menu-item menu-item-type-post_type menu-item-object-page menu-item-15"><a href="#" >Login/Register</a></li>
-        <li id="menu-item-16" class="contact menu-item menu-item-type-post_type menu-item-object-page menu-item-16"><a href="#" >Contact Us</a></li>
+        <li id="menu-item-15" class="blog menu-item menu-item-type-post_type menu-item-object-page menu-item-15"><a href="compare.php" >Compare</a></li>
+        <li id="menu-item-16" class="contact menu-item menu-item-type-post_type menu-item-object-page menu-item-16"><a href="#contactus" >Contact Us</a></li>
       </ul>
 
       <ul id="menu-main-navigation-1" class="mobile clearfix"><li class="work menu-item menu-item-type-post_type menu-item-object-page menu-item-17"><a href="#" >Our Work</a></li>
         <li class="about menu-item menu-item-type-post_type menu-item-object-page menu-item-14"><a href="#" >About Us</a></li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-19 current_page_item menu-item-21"><a href="#" >Home</a></li>
-        <li class="blog menu-item menu-item-type-post_type menu-item-object-page menu-item-15"><a href="#" >Blog</a></li>
-        <li class="contact menu-item menu-item-type-post_type menu-item-object-page menu-item-16"><a href="#" >Contact Us</a></li>
+        <li class="blog menu-item menu-item-type-post_type menu-item-object-page menu-item-15"><a href="#" >Compare</a></li>
+        <li class="contact menu-item menu-item-type-post_type menu-item-object-page menu-item-16"><a href="index.php#aboutus" >Contact Us</a></li>
       </ul>
     </nav>
 	</header>
-    <div class="social">
-      <ul>
-        <li title="Follow us on Twitter"><a class="twitter" href="#" target="_blank"></a></li>
-        <li title="Like us on Facebook"><a class="facebook" href="#" target="_blank"></a></li>
-      </ul>
-    </div>
+   
 </div>
 <?php 
 	if (isset($_GET["message"])){
 		if($_GET["message"]==1){
-			echo '<font color="green"><b>Your order has been registered, we will get to you shortly</b></font> ';
+			echo '<font color="green"><b style="position:relative; left:300px; top:80px;">Your order has been registered, we will get to you shortly</b></font><style> #footertext{position:absolute;bottom:0px;}</style> ';
 			$_SESSION= Array();
-			session_destroy();}
+			session_destroy();
+		 }
 		else{
-		echo 	'<font color="red"><b>There was some error. Sorry for inconvienence. Please try again by clicking on order now</b></font>'; }}
+		echo 	'<font color="red"><b style="position:relative; left:300px; top:80px;>There was some error. Sorry for inconvienence. Please try again by clicking on order now</b></font>'; }}
 		else{
 		?>
 
@@ -127,19 +124,36 @@ span.work-section {
     <tr><td>Image</td>
     <td>Name</td>
     <td>Quantity</td>
-    <td></td>
+    <td>Cost(Rs.)</td>
+    <td class="last_child"></td>
     </tr>
-    <?php foreach($_SESSION['basket'] as $i){
+    <?php $total=0; foreach($_SESSION['basket'] as $i){
 		if(is_int($i)) continue;
 	
-		echo '<tr><td><p><img src="products_images/'.$i['name'].'.jpg" width="50px" height="50px"></td><td>'.$i['name'].'</td><td>'.'<input type="number" min = "1" size="10" value="'.$i['count'].'" class="quantity_count" name="'.$i['name'].'"></td><td><input type="hidden" class ="hiddenDelete" title="'.$i['name'].'"><img src="images/delete.png" alt="Delete" class="deleteButton"/></td></tr>';
+		echo '<tr><td><p><img src="products_images/'.$i['name'].'.jpg" width="50px" height="50px"></td><td>'.$i['name'].'</td><td>'.'<input type="number" min = "1" size="10" value="'.$i['count'].'" class="quantity_count" name="'.$i['name'].'"></td><td class="price">'.$i['count']*$i['ourprice'].'</td><td class="last_child"><input type="hidden" class ="hiddenDelete" title="'.$i['name'].'"><img src="images/delete.png" alt="Delete" class="deleteButton"/></td></tr>';
+		$total+=$i['count']*$i['ourprice'];
 	}
 ?>
+<tr><td colspan="3">Total</td><td id="totaltd"><?php echo $total; ?></td><td colspan="2"></td></tr> 
 <script> 
 var intial_count,final_count; 
 $(".quantity_count").hover(
-function(){intial_count =$(this).val();},
-function(){ final_count = $(this).val();
+function(){intial_count =parseInt($(this).val(),10);},
+function(){ final_count = parseInt($(this).val(),10);
+//alert(intial_count+" "+final_count);
+//var cost= parseInt($(this).parent().find(".price").html(),10);alert(cost);
+var cost= $(this).parent().parent().find(".price").html()
+cost= cost/intial_count;
+cost=cost*final_count;
+//alert(cost);
+
+var total= 0;
+	$(".price").each(function(){
+
+		total+=parseInt($(this).html(),10);
+	});
+	$("#totaltd").html(total);
+$(this).parent().parent().find(".price").html(cost);
 if(final_count!= intial_count){
 	var title=$(this).attr("name");
 	$.post("update_cart.php",{final_count:final_count,title:title},function(){
@@ -158,9 +172,14 @@ $(".deleteButton").click(function(){
 	$.post("update_cart.php",{itemName:name},function(){
 	});
 	$(this).parent().parent().remove();
-	if($(".hiddenDelete".length)){}else{
+	if($(".hiddenDelete").length){}else{
 		$("#urcart").remove();
 	}
+	var total= 0;
+	$(".price").each(function(){
+		total+=parseInt($(this).html(),10);
+	});
+	$("#totaltd").html(total);
 });
           </script>
         </table>
@@ -183,7 +202,7 @@ $("#shopMore").click(function(){
   <div class="container">
               
               <blockquote id="formBlock"> Please fill the following information to proceed:-<br/>
-                          <form method="post" action="php/mailer.php">
+                          <form id="form_final" method="post" action="php/mailer.php">
                           <table>
                           <tr><td>
                           <input type="text" title="name" name="name" class="input_field" placeholder="Name" required><br/>
@@ -195,7 +214,7 @@ $("#shopMore").click(function(){
                           </td>
                      
                           <td>
-                          <input type="tel" pattern="/^d{10}$/" name="phoneno" placeholder="Phone No." required>
+                          <input type="text" name="phoneno" placeholder="Phone No." required>
                           </td>
                           </tr>
                           <tr>
@@ -205,10 +224,13 @@ $("#shopMore").click(function(){
                           </tr>
                           <tr>
                           <td>
-                          <input id="captchaField" type="text" name="captcha" placeholder="Enter the image text here">
+                          <input id="captchaField" type="text" name="captcha" placeholder="Enter the image text here" title="Just click outside after filling the correct captcha">
                           </td>
                           <td id="captcharow">
-                          <img id="captcha" src="captcha.php" alt="verification"/>		
+                          <?php $x= rand(0,9); $y= rand(0,9);
+						  $_SESSION['pass_phrase']= sha1($x+$y);
+						  echo $x.' + '.$y;
+						  ?>	
                           </td>
                           <td>
                           <img src="images/refresh.png" id="refreshCaptcha">
@@ -216,9 +238,11 @@ $("#shopMore").click(function(){
                           </tr>
 
                           </table>
+                       
                           <div id="captchaError">Wrong Captcha. Fill the Captcha correctly to click Submit button</div>
-                          <button disabled formaction="completeorder.php" class="red_button" id="submitButton" type="submit">Submit</button>
+                          <button formaction="php/mailer.php" class="red_button" id="submitButton" type="submit">Submit</button>
                           </form>
+                          </blockquote>
                           <script>
 						  $("#formfield").toggle();
 						  
@@ -226,46 +250,36 @@ $("#shopMore").click(function(){
 							  "cursor":"pointer",
 							  "position":"relative",
 							  "left":"-75px"});
-						  $("#refreshCaptcha").click(function(){
-							  $("#captcha").remove();
-							 var img= $('<img id="captcha" src="captcha.php" alt="verification">');
-							 $("#captcharow").append(img);
-
-							  
-						  });
+						  $("#refreshCaptcha").click(function(){$.post("update_cart.php",{givemecaptcha:1},function(data){
+							  $("#captcharow").html(data);
+							 })});
 						  $("#checkout_button").click(function(){
 						  $("#formfield").toggle();
 						  $("#cart_items_description").toggle();});
-						  </script>
-                          <script>
-						  $("#captchaField").blur(function(){
+						  $("#form_final").submit(function(){
 							 
-							  var value= $(this).val();
+							  var value= $("#captchaField").val();
+							  alert(value);
 							  $.post("update_cart.php",{value:value},function(data){
-								  
-								if(data==1){
+								  alert("yes");
+								/*if(data==1){
 									
-									  $("#submitButton").attr("disabled",false);
+									  return true;
 									  
-									  alert("yes");
 								  } else {
 									  	$("#captchaError").dialog({
 			  title:'Error',
 			  buttons: { "OK": function() { $(this).dialog("close"); 
 										  }
 						}
-				   });
-
-							$("#captcha").remove();
-							 var img= $('<img id="captcha" src="captcha.php" alt="verification">');
-							 $("#captcharow").append(img);
+						
+				   });return true;
 
 
-									  
+
 								  }
-									  
 							  
-							  });});
+							  */}); });
 						  </script>    
 			  
           
@@ -296,12 +310,28 @@ $("#shopMore").click(function(){
   </div>
 </div>
 <?php } ?>
-<div class="full-width dark-grey flat footer">
+<a id="contactus">
+
+<div class="full-width tan" >
+  <div class="container">
+    <div class="heading">
+      <h1>Contact Us</h1>
+    </div>
+    <p style="font-size:18px; line-height:1.5em; text-align:center;"> Contact us : roorkeedelivers@gmail.com<br/>
+Numbers: +917417687975 , +919557509534, +917417505986
+</p>
+
+  </div>
+</div> 
+</a>
+
+<div class="full-width dark-grey flat footer" id="footertext">
   <div class="container">
     <div class="footer-foot">
       <div class="info">
         <p><span>Roorkee Delivers, Roorkee, Uttarakhand, India</span></p>
         <p>© Copyright 2013 Roorkee Delivers. All Rights Reserved.</p>
+        <p>Developed By: <a href="http://www.facebook.com/amanpreet.singh.18" target="_blank">Amanpreet Singh</a></p>
       </div>
       <div class="footer-icons">
         <ul>
@@ -313,12 +343,18 @@ $("#shopMore").click(function(){
     </div>
   </div>
 </div>
+</div>
+<script> 
+$("#contactus").toggle();
+$("#menu-item-16").click(function(){ $("#contactus").toggle();});
+</script>
 <script>
 $(document).tooltip({
-	  items:'.social ul li',
+	  items:'.social ul li,#captchafield',
 	  show:500,
 	  show:'',
 	  hide:500}); 
+	 
 </script>
 
 </body>

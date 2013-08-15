@@ -1,4 +1,4 @@
-<?php session_start(); $_SESSION= Array(); session_destroy();session_start(); $_SESSION['basket']['j']=0;  ?>
+<?php session_start(); $_SESSION= Array(); session_destroy(); ?>
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -90,14 +90,14 @@ span.work-section {
 			<ul id="menu-main-navigation" class="desktop"><li id="menu-item-17" class="work menu-item menu-item-type-post_type menu-item-object-page menu-item-17"><a href="ordernow.php" >Order Now</a></li>
         <li id="menu-item-14" class="about menu-item menu-item-type-post_type menu-item-object-page menu-item-14"><a href="#aboutus" >About Us</a></li>
         <li id="menu-item-21" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-19 menu-item-21" ><a href="#" ></a></li>
-        <li id="menu-item-15" class="blog menu-item menu-item-type-post_type menu-item-object-page menu-item-15"><a href="compare.php" >Compare</a></li>
+        <li id="menu-item-15" class="blog menu-item menu-item-type-post_type menu-item-object-page menu-item-15"><a href="index.php" >Home</a></li>
         <li id="menu-item-16" class="contact menu-item menu-item-type-post_type menu-item-object-page menu-item-16"><a href="#contactus" >Contact Us</a></li>
       </ul>
 
       <ul id="menu-main-navigation-1" class="mobile clearfix"><li class="work menu-item menu-item-type-post_type menu-item-object-page menu-item-17"><a href="#" >Our Work</a></li>
         <li class="about menu-item menu-item-type-post_type menu-item-object-page menu-item-14"><a href="#aboutus" >About Us</a></li>
         <li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-19 current_page_item menu-item-21"><a href="#" >Home</a></li>
-        <li class="blog menu-item menu-item-type-post_type menu-item-object-page menu-item-15"><a href="compare.php" >Compare</a></li>
+        <li class="blog menu-item menu-item-type-post_type menu-item-object-page menu-item-15"><a href="#" >Compare</a></li>
         <li class="contact menu-item menu-item-type-post_type menu-item-object-page menu-item-16"><a href="#" >Contact Us</a></li>
       </ul>
     </nav>
@@ -105,138 +105,24 @@ span.work-section {
 </div>
 
 <div class="full-width tan">
-	<div class="container">
+	<div class="container" id="price_list">
 		<div class="heading">
-			<h1>
-				Hi. Welcome to Roorkee Delivers.
-        <small>We deliver stuff at your doorstep.</small>
-			</h1>
 		</div>
-		<div class="featured-video fitvid">
-			<div id="center-images">
-        <img src="images/we-deliver.png"/>
-      </div>
-		</div>
-		<div class="more-work">
-			<a class="arrow-btn" href="ordernow.php">
-				<div class="arrow left">
-					<span></span>
-				</div>
-    		<span class="text">Order Now</span>
-    		<div class="arrow right">
-    			<span></span>
-    		</div>
-			</a>
-		</div>
+        <table>
+        <tr><td>Item</td><td>Market Price</td><td style="font-weight:bold;">Our Price</td></tr>
+           <tr><td>Bucket</td><td>150</td><td style="font-weight:bold;">100</td></tr>   <tr><td>Pillow</td><td>150</td><td style="font-weight:bold;">120</td></tr>   <tr><td>Mug</td><td>25</td><td style="font-weight:bold;">15</td></tr>   <tr><td>Jhaadu</td><td>80</td><td style="font-weight:bold;">50</td></tr>   <tr><td>Soap Case</td><td>25</td><td style="font-weight:bold;">15</td></tr>
+           <tr><td>Laundry Bag</td><td>40</td><td style="font-weight:bold;">25</td></tr>
+           <tr><td>Cold/Hot 4-inch Mattress</td><td>1600</td><td>1250</td></tr>
+           
+        </table>
+        <br/>
+        <br/>
+             For combo pack 1500 + Free delivery at your doorsteps 
+          
+
 	</div>
 </div>
 
-<div class="full-width flush-bottom">
-	<div class="container clearfix">
-		<div class="heading">
-			<h1>What Makes Us Different</h1>
-			<p>We deliver ordered goods right at your doorstep, and quickly. Just let us know what you need! </p>
-		</div>
-
-      <span class="work-section" href="#">
-				<div class="icon">
-					<img src="images/clock.png" alt="Round  the clock">
-				</div>
-				<h2>Anytime Fresh Delivery</h2>
-				<p>Our fresh bread and butter, we deliver what you want, when you want.<br/> Want something late at night? Not to worry. You have us.</p>
-				<!--div class="arrow-btn white">
-					<div class="arrow left">
-						<span></span>
-					</div>
-	    		<span class="text">Learn More</span>
-	    		<div class="arrow right">
-	    			<span></span>
-	    		</div>
-				</div-->
-			</span>
-      <span class="work-section" href="#">
-				<div class="icon">
-					<img src="images/heli.png" alt="Instant">
-				</div>
-				<h2>Instant Delivery</h2>
-				<p><br/><br/>Tired of waiting?<br/>With our super fast delivery forget whats watch.<br/><br/></p>
-				<!--div class="arrow-btn white">
-					<div class="arrow left">
-						<span></span>
-					</div>
-	    		<span class="text">Learn More</span>
-	    		<div class="arrow right">
-	    			<span></span>
-	    		</div>
-				</div-->
-			</span>
-      <span class="work-section" href="#">
-				<div class="icon">
-					<img src="images/quality.png" alt="Quality Guranteed">
-				</div>
-				<h2>Quality Guranteed</h2>
-				<p>We are deeply passionate about quality and promise that you will never be disappointed<br/><br/></p>
-				<!--div class="arrow-btn white">
-					<div class="arrow left">
-						<span></span>
-					</div>
-	    		<span class="text">Learn More</span>
-	    		<div class="arrow right">
-	    			<span></span>
-	    		</div>
-				</div-->
-			</span>
-		
-	</div>
-</div>
-
-<div class="full-width red">
-  <div class="container">
-    <div class="testimonials">
-      <div id="test-slider" class="swiper">
-        <ul class="swipe-wrap">
-          <li class="testimonial">
-              
-              <blockquote>
-                <p style="font-size:22px;">We here at Roorkee Delivers provide best and affordable material available anywhere, confining to our standard, we serve you best.</p>
-                
-              </blockquote>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-
-</div>
-<a id="aboutus"></a>
-<div class="full-width tan" >
-  <div class="container">
-    <div class="heading">
-      <h1>About Us</h1>
-    </div>
-    <br/>
-    <br/>
-    <br/>
-    <p style="font-size:18px; line-height:1.5em; text-align:center;"><span style="margin:150px;">The students of IIT R bring to you an all-purpose delivery service: Roorkee Delivers.</span><br/><br/>
-The story of Roorkee Delivers started two years ago, when we for the first time faced the outside world. Since we were new to this alien world, we made mistakes. Hence, we ended up buying unnecessary and over-priced stuff. Soon, we found out that it happens year after year. We believe you can stop this, by letting our experience guide you.<br/><br/>Anytime and anyplace, we at Roorkee Delivers guarantee you instant delivery at your doorstep at price lower than the market while being just a call away.
-We provide you with everything you’ll need including buckets, mugs, all-purpose-user-friendly jhaadus, mattresses and friendly advice. The best part is that the advice comes free.</p>
-  </div>
-</div>
-
-
-<div class="full-width tan flush-top">
-  <div class="container">
-    <div class="mini-contact clearfix">
-      
-                
-    <div class="social" >
-      <ul>
-        <li title="Follow us on Twitter"><a class="twitter" href="" target="_blank"></a></li>
-        <li title="Like us on Facebook"><a class="facebook" href="http://facebook.com/rrkdelivers" target="_blank"></a></li>
-      </ul>
-    </div>
-                </div>
 
 <a id="contactus">
 <div class="full-width tan" >

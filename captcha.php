@@ -1,4 +1,7 @@
 <?php  session_start();
+unset($img);
+unset($pass_phrase);
+unset($_SESSION['pass_phrase']);
 						  define('CAPTCHA_NUM',6);
 						  define('CAPTCHA_WIDTH',150);
 						  define('CAPTCHA_HEIGHT',40);
@@ -20,8 +23,9 @@
 							  imagesetpixel($img,rand()%CAPTCHA_WIDTH,rand()%CAPTCHA_HEIGHT,$graphic_color);
 						  }
 						  imagettftext($img,24,0,20,CAPTCHA_HEIGHT-10,$text_color,"Courier New Bold.ttf",$pass_phrase);
-						  header("Content-Type: image/png");
-						  imagepng($img);
+						  imagegif($img);
+						  header("Content-Type: image/gif");
+						  
 						  imagedestroy($img);
 						
 ?>

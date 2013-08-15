@@ -1959,8 +1959,9 @@ form .gfield_error label {
 }
 
 .social {
-	position:absolute;
-	right:0px;
+	position:relative;
+	right:-930px;
+	top:-400px;
   
   margin-right: 2%;
   margin-top: 10px;
@@ -3340,7 +3341,7 @@ form .gfield_error label {
 	margin:12px;
 }
 .item_image:first-child{
-	margin-left:-45px;}
+	margin-left:50px;}
 .addtocartbutton{
 	position:absolute;
 	top:0px;
@@ -3383,8 +3384,12 @@ table tr td{
 }
 table tr {
 	
-	border:1px solid #111;
-	border-collapse:collapse;
+	border:1px solid #111; 
+}
+
+.last_child{
+	
+	border:1px solid #111; 
 }
 .red_button{
  outline-width: medium;
@@ -3449,7 +3454,7 @@ input::-webkit-input-placeholder {
 }
 	
 form table tr   {
-	border:none;
+	border:none !important;
 	border-style:none;
 }
 blockquote{
@@ -3467,4 +3472,36 @@ button{
 }
 #captchaError{
 	display:none;
+}
+#menu-item-21 a{
+  background-color:transparent;
+  background-image:url(images/roorkee_delivers.png);
+  background-position:0 0;
+  background-repeat:no-repeat no-repeat;
+  display:block;
+  height:112px;
+  margin:0 auto;
+  text-indent:-999em;
+  width:112px;
+  
+}
+#menu-item-21{
+	text-decoration:none;
+}
+.last_child{
+	border: 1px solid #111;
+} 
+form tr td{
+	border:none;
+}
+#footertext{
+	position:relative;
+	bottom:0px;
+	}
+#combos {
+margin:0 auto;
+}
+#price_list{
+	position:relative;
+	right:-250px;
 }

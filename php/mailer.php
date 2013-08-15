@@ -1,6 +1,19 @@
-<?php
+<?php	
 session_start();
-require("../PHPMailer/class.phpmailer.php");
+		$dbc= mysqli_connect("mysql3.000webhost.com","a3548479_RD","Rd3l!v3rs","a3548479_RD");
+		//$dbc = mysqli_connect('localhost','root','welcome','rd');
+$name=mysqli_real_escape_string($dbc,$_POST["name"]);
+$mobile=mysqli_real_escape_string($dbc,$_POST["phoneno"]);
+$email=mysqli_real_escape_string($dbc,$_POST["email"]);
+$address= mysqli_real_escape_string($dbc,$_POST['address']);
+$message='';
+foreach($_SESSION['basket'] as $k){
+	if(isset($k['name'])){
+		$message.= ($k['name']."&nbsp;&nbsp;&nbsp;".$k['count']."<br/>"); 
+	}
+	}
+
+/*require("../phpmailer/class.phpmailer.php");
 
 $mail = new PHPMailer();
 
@@ -14,14 +27,13 @@ foreach($_SESSION['basket'] as $k){
 	}
 	}
 
-$to="deliversroorkee@gmail.com";
+$to="apsdehal@gmail.com";
 $subject="Order by".$name;
 
 $headers  = 'MIME-Version: 1.0' . "\r\n";
 $headers .= 'Content-type: text/plain; charset=iso-8859-1' . "\r\n";
 
 
-echo 'hello';
 
 $mail->IsSMTP(); // enable SMTP
 	$mail->SMTPDebug = 2;  // debugging: 1 = errors and messages, 2 = messages only
@@ -29,26 +41,26 @@ $mail->IsSMTP(); // enable SMTP
 	$mail->SMTPSecure = 'tls'; // secure transfer enabled REQUIRED for GMail
 	$mail->Host = 'smtp.gmail.com';
 	$mail->Port = 587; 
-	$mail->Username = 'deliversroorkee@gmail.com';  
-	$mail->Password = '';           
-	$mail->SetFrom('deliversroorkee@gmail.com', $subject);
+	$mail->Username = 'roorkee.delivers@gmail.com';  
+	$mail->Password = 'rdel!vers';           
+	$mail->SetFrom('roorkee.delivers@gmail.com', $subject);
 	$mail->Subject = "Order Description";
 	$mail->Body = $message."\r\nCustomer Name: ".$name."\r\nMobile Number:".$mobile."\r\nEmail ID: ".$email;
-	$mail->AddAddress('deliversroorkee@gmail.com');
+	$mail->AddAddress('roorkee.delivers@gmail.com');
 echo 'here';
-	if(!$mail->Send()) {
+	if($mail->Send()) {
 		//$error = 'Mail error: '.$mail->ErrorInfo; 
 		//echo $error;
 		header("Location: ../checkout.php?message=2");
-		return false;
+
+
 		
-	} else {
+	} else*/ {
+		
+$query ="INSERT INTO roorkee_delivers (name,mobile,email,address,order_info) VALUES ('$name','$mobile','$email','$address','$message')";
+mysqli_query($dbc,$query);
+mysqli_close($dbc);
 		header("Location: ../checkout.php?message=1");
-		return true;
+		}
 		
-	}
-
-
-
-?>
-
+?>	
